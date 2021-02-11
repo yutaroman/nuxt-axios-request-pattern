@@ -2,7 +2,30 @@
   <div class="container">
     <h1
       class="title"
-      v-text="'nuxt-axios-request-pattern'"
+      v-text="'nuxt-axios-request-pattern ( page )'"
+    />
+    <h2
+      class="subtitle"
+      v-text="'ユーザーデータ ( Vuex ステート, CSR )'"
+    />
+    <template v-if="userDetailData">
+      <p
+        class="text"
+        v-text="`uuid: ${userDetailData.uuid}`"
+      />
+      <p
+        class="text"
+        v-text="`名前: ${userDetailData.name}`"
+      />
+      <p
+        class="text"
+        v-text="`年齢: ${userDetailData.age}`"
+      />
+    </template>
+    <p
+      v-else
+      class="text"
+      v-text="'3秒後にフェッチします...'"
     />
     <h2
       class="subtitle"
@@ -74,7 +97,7 @@ interface Data {
   comments: null | { data: { id: number, body: string }[] },
 }
 export default Vue.extend({
-  async asyncData ({ app }: Context): Promise<Data> {
+  async asyncData ({ app }: Context): Promise<object> {
     const [categories, posts] = await Promise.all([
       app.$repositories('categories').index(),
       app.$repositories('posts').index()
@@ -91,9 +114,22 @@ export default Vue.extend({
       comments: null
     }
   },
+  computed: {
+    userDetailData (): any {
+      return this.$accessor.api.me.userDetailData
+    }
+  },
+  mounted () {
+    // 3秒後にフェッチする
+    setTimeout(() => {
+      this.$accessor.api.me.fetchDetail()
+    }, 5000)
+  },
   methods: {
-    async fetchComments (): void {
+    async fetchComments (): Promise<void> {
       try {
+        // FIXME: Property 'index' does not exist on type 'Function'.
+        // @ts-ignore
         const response = await this.$repositories('comments').index()
         this.comments = response.data
       } catch (error) {

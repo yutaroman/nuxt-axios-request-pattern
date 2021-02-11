@@ -1,8 +1,28 @@
 <template>
   <div>
+    <header class="header">
+      <p
+        v-text="'ヘッダー ( layout )'"
+      />
+      <p
+        v-if="userDetailData"
+        v-text="`ユーザー名: ${userDetailData.name}`"
+      />
+    </header>
     <Nuxt />
   </div>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+  computed: {
+    userDetailData (): any {
+      return this.$accessor.api.me.userDetailData
+    }
+  }
+})
+</script>
 
 <style>
 html {
@@ -30,33 +50,13 @@ html {
   box-sizing: border-box;
   margin: 0;
 }
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
+.header {
   background-color: #35495e;
+  height: 50px;
+  color: #fff;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>
