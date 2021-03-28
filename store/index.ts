@@ -9,15 +9,15 @@ export const getters = getterTree(state, {})
 export const mutations = mutationTree(state, {})
 export const actions = actionTree({ state }, {})
 export const accessorType = getAccessorType({
-  state,
-  getters,
-  mutations,
-  actions,
-  modules: {
-    api: {
-      modules: {
-        me
-      }
+    state,
+    getters,
+    mutations,
+    actions,
+    modules: {
+        api: {
+            modules: {
+                me
+            }
+        }
     }
-  }
 })

@@ -6,8 +6,8 @@ declare module 'vue/types/vue' {
   }
 }
 const repositories: Plugin = ({ app }, inject) => {
-  inject('repositories', (name: string) => {
-    return RepositoryFactory.get(name)(app.$axios)
-  })
+    inject('repositories', (name: string) => {
+        return RepositoryFactory.get(name)(app.$axios)
+    })
 }
 export default repositories

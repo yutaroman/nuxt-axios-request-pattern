@@ -1,26 +1,26 @@
 <template>
-  <div>
-    <header class="header">
-      <p
-        v-text="'ヘッダー ( layout )'"
-      />
-      <p
-        v-if="userDetailData"
-        v-text="`ユーザー名: ${userDetailData.name}`"
-      />
-    </header>
-    <Nuxt />
-  </div>
+    <div>
+        <header class="header">
+            <p
+                v-text="'ヘッダー ( layout )'"
+            />
+            <p
+                v-if="userDetailData"
+                v-text="`ユーザー名: ${userDetailData.name}`"
+            />
+        </header>
+        <Nuxt />
+    </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-  computed: {
-    userDetailData (): any {
-      return this.$accessor.api.me.userDetailData
+    computed: {
+        userDetailData (): any {
+            return this.$accessor.api.me.userDetailData
+        }
     }
-  }
 })
 </script>
 

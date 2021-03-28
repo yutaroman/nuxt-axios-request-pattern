@@ -1,7 +1,7 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
 const resource = '/categories'
 export default ($axios: NuxtAxiosInstance) => ({
-  index () {
-    return $axios.get(resource)
-  }
+    index () {
+        return $axios.get(resource)
+    }
 })
