@@ -8,8 +8,9 @@ module.exports = {
     '@nuxtjs/eslint-config-typescript',
     'plugin:nuxt/recommended'
   ],
-  plugins: [
-  ],
-  // add your custom rules here
-  rules: {}
+  plugins: [],
+  rules: {
+      'indent': ['error', 4], // 4スペースインデントでない箇所をエラーとする ( .editorconfig に合わせた )
+      'vue/html-indent': ['error', 4], // 上記ルールを vue template 内にも適用
+  }
 }
